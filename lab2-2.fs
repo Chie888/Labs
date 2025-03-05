@@ -20,7 +20,7 @@ let generateRandomNumbers (count: int) (maxValue: int) =
 // Функция для чтения чисел из файла
 let readNumbersFromFile (filePath: string) =
     try
-        File.ReadAllLines(filePath) |> Array.toList
+        File.ReadAllLines(filePath) |> Seq.toList
         |> List.map (fun line ->
             try
                 int line
