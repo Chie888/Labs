@@ -17,7 +17,7 @@ let generateRandomStrings (count: int) (maxLength: int) =
 // Функция для чтения строк из файла
 let readStringsFromFile (filePath: string) =
     try
-        File.ReadAllLines(filePath) |> Array.toList
+        File.ReadAllLines(filePath) |> Seq.toList
     with
     | ex -> printfn "Ошибка чтения файла: %s" ex.Message; []
 
