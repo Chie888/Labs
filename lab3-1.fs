@@ -1,7 +1,7 @@
 ﻿open System
 open System.IO
 
-// Функция для генерации случайных строк
+
 let generateRandomStrings (count: int) =
     let rand = new Random()
     seq {
@@ -10,14 +10,14 @@ let generateRandomStrings (count: int) =
     }
 
 
-// Функция для чтения строк из файла
+
 let readStringsFromFile (filePath: string) =
     try
         File.ReadAllLines(filePath) |> Array.toSeq
     with
     | ex -> printfn "Ошибка чтения файла: %s" ex.Message; Seq.empty
 
-// Функция для ввода строк с клавиатуры
+
 let rec inputStringsFromConsole () =
     printfn "Введите строку (введите 'exit' для завершения):"
     let input = Console.ReadLine()
@@ -29,12 +29,12 @@ let rec inputStringsFromConsole () =
             yield! inputStringsFromConsole ()
         }
 
-// Функция для получения последовательности длин строк
+
 let getLengths (strings: seq<string>) =
     strings
     |> Seq.map (fun s -> s.Length)
 
-// Основная функция
+
 let main () =
     printfn "Выберите источник данных:"
     printfn "1. Ввести с клавиатуры"
