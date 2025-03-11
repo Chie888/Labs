@@ -36,6 +36,7 @@ let getLengths (strings: seq<string>) =
 
 
 let main () =
+    printfn "ПРОГРАММА ДЛЯ ВЫЧИСЛЕНИЯ ДЛИН СТРОК"
     printfn "Выберите источник данных:"
     printfn "1. Ввести с клавиатуры"
     printfn "2. Сгенерировать случайные строки"
