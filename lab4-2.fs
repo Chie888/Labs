@@ -26,13 +26,13 @@ let isLeaf = function
     | Node(Leaf, _, Leaf) -> true
     | _ -> false
 
-// fold
-let rec collectPositiveLeaves tree =
+let rec foldTree f acc tree =
     match tree with
-    | Leaf -> []
-    | Node(Leaf, v, Leaf) when v > 0 -> [v]
-    | Node(left, _, right) -> collectPositiveLeaves left @ collectPositiveLeaves right
-
+    | Leaf -> acc
+    | Node(left, v, right) -> 
+        let accLeft = foldTree f acc left
+        let accNode = if isLeaf tree && v > 0 then v :: accLeft else accLeft 
+        foldTree f accNode right
 
 
 let rec inputTree tree =
@@ -59,7 +59,7 @@ let main argv =
     printfn "\nИсходное дерево:"
     printTree "" tree
     
-    let positiveLeaves = collectPositiveLeaves tree
+    let positiveLeaves = foldTree (fun acc tree -> acc) [] tree
     
     printfn "\nСписок положительных листьев:"
     printfn "%A" positiveLeaves
