@@ -2,9 +2,9 @@
 
 public class PackagingDimensions
 {
-    private int _length
-    private int _width 
-    private int _height
+    private int _length;
+    private int _width;
+    private int _height;
 
 
     public PackagingDimensions()
