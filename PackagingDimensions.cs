@@ -6,6 +6,10 @@ public class PackagingDimensions
     private int _width;
     private int _height;
 
+    public int length { get { return _length; } set { _length = value; } }
+    public int width { get { return _width; } set { _width = value; } }
+    public int height { get { return _height; } set { _height = value; } }
+
 
     public PackagingDimensions()
     {
