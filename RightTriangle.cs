@@ -2,54 +2,54 @@
 
 public class RightTriangle
 {
-    private double firstLeg;
-    private double secondLeg;
+    private double _firstLeg;
+    private double _secondLeg;
 
-    public double FirstLeg { get { return firstLeg; } set { firstLeg = value; } }
-    public double SecondLeg { get { return secondLeg; } set { secondLeg = value; }
+    public double firstLeg { get { return _firstLeg; } set { _firstLeg = value; } }
+    public double secondLeg { get { return _secondLeg; } set { _secondLeg = value; }
 
     
     public RightTriangle()
     {
-        firstLeg = 0;
-        secondLeg = 0;
+        _firstLeg = 0;
+        _secondLeg = 0;
     }
 
   
     public RightTriangle(double first, double second)
     {
-        this.firstLeg = first;
-        this.secondLeg = second;
+        this._firstLeg = first;
+        this._secondLeg = second;
     }
 
    
     /// Вычисляет площадь прямоугольного треугольника по формуле 1/2 * ширина(1-й катет) * высота(2-й катет).
     public double CalculateArea()
     {
-        return 0.5 * firstLeg * secondLeg;
+        return 0.5 * _firstLeg * _secondLeg;
     }
 
     public override string ToString()
     {
-        return $"Катеты: firstLeg = {firstLeg}, secondLeg = {secondLeg}";
+        return $"Катеты: _firstLeg = {_firstLeg}, _secondLeg = {_secondLeg}";
     }
 
 
     public static RightTriangle operator ++(RightTriangle triangle)
     {
-        return new RightTriangle(triangle.firstLeg * 2, triangle.secondLeg * 2);
+        return new RightTriangle(triangle._firstLeg * 2, triangle._secondLeg * 2);
     }
 
 
     public static RightTriangle operator --(RightTriangle triangle)
     {
-        return new RightTriangle(triangle.firstLeg / 2, triangle.secondLeg / 2);
+        return new RightTriangle(triangle._firstLeg / 2, triangle._secondLeg / 2);
     }
 
 
     public static explicit operator double(RightTriangle triangle)
     {
-        if (triangle.firstLeg > 0 && triangle.secondLeg > 0)
+        if (triangle._firstLeg > 0 && triangle._secondLeg > 0)
             return triangle.CalculateArea();
         else
             return -1;
@@ -58,7 +58,7 @@ public class RightTriangle
 
     public static implicit operator bool(RightTriangle triangle)
     {
-        return triangle.firstLeg > 0 && triangle.secondLeg > 0;
+        return triangle._firstLeg > 0 && triangle._secondLeg > 0;
     }
 
   
