@@ -2,9 +2,9 @@
 
 public class PackagingDimensions
 {
-    private int length { get; set; }
-    private int width { get; set; }
-    private int height { get; set; }
+    public int length { get; set; }
+    public int width { get; set; }
+    public int height { get; set; }
 
 
     public PackagingDimensions()
