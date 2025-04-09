@@ -5,7 +5,10 @@ public class RightTriangle
     private double firstLeg;
     private double secondLeg;
 
+    public double FirstLeg { get { return firstLeg; } set { firstLeg = value; } }
+    public double SecondLeg { get { return secondLeg; } set { secondLeg = value; }
 
+    
     public RightTriangle()
     {
         firstLeg = 0;
