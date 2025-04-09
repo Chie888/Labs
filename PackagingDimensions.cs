@@ -2,37 +2,37 @@
 
 public class PackagingDimensions
 {
-    public int length { get; set; }
-    public int width { get; set; }
-    public int height { get; set; }
+    private int _length
+    private int _width 
+    private int _height
 
 
     public PackagingDimensions()
     {
-        length = 0;
-        width = 0;
-        height = 0;
+        _length = 0;
+        _width = 0;
+        _height= 0;
     }
 
 
-    public PackagingDimensions(int length, int width, int height)
+    public PackagingDimensions(int _length, int _width, int height)
     {
-        this.length = length;
-        this.width = width;
-        this.height = height;
+        this._length = _length;
+        this._width = _width;
+        this._height= height;
     }
 
 
     public PackagingDimensions(PackagingDimensions other)
     {
-        this.length = other.length;
-        this.width = other.width;
-        this.height = other.height;
+        this._length = other._length;
+        this._width = other._width;
+        this._height= other.height;
     }
 
 
     public override string ToString()
     {
-        return $"Упаковка: Длина = {length}, Ширина = {width}, Высота = {height}";
+        return $"Упаковка: Длина = {_length}, Ширина = {_width}, Высота = {height}";
     }
 }
