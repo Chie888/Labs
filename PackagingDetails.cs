@@ -5,6 +5,9 @@ public class PackagingDetails : PackagingDimensions
     private int _weight;
     private string _material;
 
+    public int weight { get { return _weight; } set { _weight = value; } }
+    public string material { get { return _material; } set { _material = value; } }
+
 
     public PackagingDetails() : base()
     {
