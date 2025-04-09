@@ -2,42 +2,42 @@
 
 public class PackagingDetails : PackagingDimensions
 {
-    public int weight { get; set; }
-    public string material { get; set; }
+    private int _weight;
+    private string _material;
 
 
     public PackagingDetails() : base()
     {
-        weight = 0;
-        material = "Не указан";
+        _weight = 0;
+        _material = "Не указан";
     }
 
 
     public PackagingDetails(int length, int width, int height, 
-        int weight, string material) : base(length, width, height)
+        int _weight, string _material) : base(length, width, height)
     {
-        this.weight = weight;
-        this.material = material;
+        this._weight = _weight;
+        this._material = _material;
     }
 
 
     public PackagingDetails(PackagingDetails other) : base(other)
     {
-        this.weight = other.weight;
-        this.material = other.material;
+        this._weight = other._weight;
+        this._material = other._material;
     }
 
    
-    public void ChangeMaterial(string newMaterial)
+    public void Change_material(string new_material)
     {
-        material = newMaterial;
+        _material = new_material;
     }
 
   
-    public void ChangeWeight(int newWeight)
+    public void Change_weight(int new_weight)
     {
-        if (newWeight >= 0)
-            weight = newWeight;
+        if (new_weight >= 0)
+            _weight = new_weight;
         else
             Console.WriteLine("Вес не может быть отрицательным.");
     }
@@ -45,6 +45,6 @@ public class PackagingDetails : PackagingDimensions
    
     public override string ToString()
     {
-        return base.ToString() + $", Вес = {weight}, Материал = {material}";
+        return base.ToString() + $", Вес = {_weight}, Материал = {_material}";
     }
 }
