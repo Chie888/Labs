@@ -2,8 +2,8 @@
 
 public class RightTriangle
 {
-    public double firstLeg { get; set; }
-    public double secondLeg { get; set; }
+    private double firstLeg;
+    private double secondLeg;
 
 
     public RightTriangle()
