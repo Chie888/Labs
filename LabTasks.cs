@@ -20,7 +20,7 @@ public class LabTasks
 {
     private static Random _random = new Random();
 
-    // --- Решения задач (твой исходный код, без изменений) ---
+
 
     public static void fillFileTask1(string path, int count, int minValue, int maxValue)
     {
