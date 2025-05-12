@@ -16,6 +16,7 @@ namespace CafeMenuApp
         /// <summary>
         /// Сохраняет список пунктов меню в бинарный файл с кодировкой Windows-1251.
         /// </summary>
+        /// <param name="items">Список пунктов меню для сохранения.</param>
         public static void Save(List<MenuItem> items)
         {
             try
@@ -43,6 +44,7 @@ namespace CafeMenuApp
         /// <summary>
         /// Загружает список пунктов меню из бинарного файла.
         /// </summary>
+        /// <returns>Список загруженных пунктов меню.</returns>
         public static List<MenuItem> Load()
         {
             var items = new List<MenuItem>();
@@ -77,6 +79,9 @@ namespace CafeMenuApp
         /// <summary>
         /// Добавляет новый пункт меню, проверяя уникальность ID.
         /// </summary>
+        /// <param name="items">Список пунктов меню.</param>
+        /// <param name="item">Пункт меню для добавления.</param>
+        /// <exception cref="ArgumentException">Если пункт с таким ID уже существует.</exception>
         public static void AddItem(List<MenuItem> items, MenuItem item)
         {
             if (items.Any(i => i.Id == item.Id))
@@ -89,6 +94,9 @@ namespace CafeMenuApp
         /// <summary>
         /// Удаляет пункт меню по ID.
         /// </summary>
+        /// <param name="items">Список пунктов меню.</param>
+        /// <param name="id">ID пункта для удаления.</param>
+        /// <returns>True, если пункт найден и удалён; иначе false.</returns>
         public static bool RemoveItem(List<MenuItem> items, int id)
         {
             var item = items.FirstOrDefault(i => i.Id == id);
@@ -103,6 +111,9 @@ namespace CafeMenuApp
         /// <summary>
         /// Возвращает пункты меню по категории (регистронезависимый поиск).
         /// </summary>
+        /// <param name="items">Список пунктов меню.</param>
+        /// <param name="category">Категория для поиска.</param>
+        /// <returns>Коллекция найденных пунктов меню.</returns>
         public static IEnumerable<MenuItem> GetItemsByCategory(List<MenuItem> items, string? category)
         {
             if (string.IsNullOrWhiteSpace(category))
@@ -116,6 +127,9 @@ namespace CafeMenuApp
         /// <summary>
         /// Возвращает доступные пункты меню дешевле заданной цены.
         /// </summary>
+        /// <param name="items">Список пунктов меню.</param>
+        /// <param name="maxPrice">Максимальная цена.</param>
+        /// <returns>Коллекция подходящих пунктов меню.</returns>
         public static IEnumerable<MenuItem> GetAvailableItemsCheaperThan(List<MenuItem> items, decimal maxPrice)
         {
             return from i in items
@@ -126,6 +140,8 @@ namespace CafeMenuApp
         /// <summary>
         /// Вычисляет средний вес всех пунктов меню.
         /// </summary>
+        /// <param name="items">Список пунктов меню.</param>
+        /// <returns>Средний вес в граммах.</returns>
         public static double GetAverageWeight(List<MenuItem> items)
         {
             if (items.Count == 0)
@@ -137,6 +153,8 @@ namespace CafeMenuApp
         /// <summary>
         /// Подсчитывает количество доступных пунктов меню.
         /// </summary>
+        /// <param name="items">Список пунктов меню.</param>
+        /// <returns>Количество доступных пунктов.</returns>
         public static int GetAvailableCount(List<MenuItem> items)
         {
             return items.Count(i => i.IsAvailable);
@@ -228,6 +246,14 @@ namespace CafeMenuApp
             {
                 MenuRepository.AddItem(_menu, new MenuItem(id, name, category, price, weight, isAvailable));
                 Console.WriteLine("Пункт меню успешно добавлен.");
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                Console.WriteLine("Ошибка: " + ex.Message);
+            }
+            catch (ArgumentNullException ex)
+            {
+                Console.WriteLine("Ошибка: " + ex.Message);
             }
             catch (ArgumentException ex)
             {
@@ -333,6 +359,8 @@ namespace CafeMenuApp
         /// <summary>
         /// Считывает целое число с консоли с проверкой на неотрицательность.
         /// </summary>
+        /// <param name="prompt">Текст приглашения для пользователя.</param>
+        /// <returns>Введённое неотрицательное целое число.</returns>
         static int ReadInt(string prompt)
         {
             while (true)
@@ -340,9 +368,9 @@ namespace CafeMenuApp
                 Console.Write(prompt);
                 if (int.TryParse(Console.ReadLine(), out int i))
                 {
-                    if (i < 0)
+                    if (!Validator.IsNonNegative(i))
                     {
-                        Console.WriteLine("Ошибка: ID не может быть отрицательным.");
+                        Console.WriteLine("Ошибка: значение не может быть отрицательным.");
                         continue;
                     }
                     return i;
@@ -354,6 +382,8 @@ namespace CafeMenuApp
         /// <summary>
         /// Считывает десятичное число с консоли с проверкой на неотрицательность.
         /// </summary>
+        /// <param name="prompt">Текст приглашения для пользователя.</param>
+        /// <returns>Введённое неотрицательное десятичное число.</returns>
         static decimal ReadDecimal(string prompt)
         {
             while (true)
@@ -361,7 +391,7 @@ namespace CafeMenuApp
                 Console.Write(prompt);
                 if (decimal.TryParse(Console.ReadLine(), out decimal d))
                 {
-                    if (d < 0)
+                    if (!Validator.IsNonNegative(d))
                     {
                         Console.WriteLine("Ошибка: значение не может быть отрицательным.");
                         continue;
@@ -375,6 +405,8 @@ namespace CafeMenuApp
         /// <summary>
         /// Считывает число с плавающей точкой с консоли с проверкой на неотрицательность.
         /// </summary>
+        /// <param name="prompt">Текст приглашения для пользователя.</param>
+        /// <returns>Введённое неотрицательное число с плавающей точкой.</returns>
         static double ReadDouble(string prompt)
         {
             while (true)
@@ -382,7 +414,7 @@ namespace CafeMenuApp
                 Console.Write(prompt);
                 if (double.TryParse(Console.ReadLine(), out double d))
                 {
-                    if (d < 0)
+                    if (!Validator.IsNonNegative(d))
                     {
                         Console.WriteLine("Ошибка: значение не может быть отрицательным.");
                         continue;
@@ -394,8 +426,10 @@ namespace CafeMenuApp
         }
 
         /// <summary>
-        /// Считывает строку с консоли с проверкой на пустоту.
+        /// Считывает непустую строку с консоли.
         /// </summary>
+        /// <param name="prompt">Текст приглашения для пользователя.</param>
+        /// <returns>Введённая непустая строка.</returns>
         static string ReadString(string prompt)
         {
             while (true)
@@ -411,6 +445,8 @@ namespace CafeMenuApp
         /// <summary>
         /// Считывает булево значение с консоли ("да" или "нет").
         /// </summary>
+        /// <param name="prompt">Текст приглашения для пользователя.</param>
+        /// <returns>True, если введено "да" или "д", иначе false.</returns>
         static bool ReadBool(string prompt)
         {
             while (true)
